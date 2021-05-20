@@ -61,6 +61,18 @@ Todo:
 6. Build component unit tests
 7. Implement snapshot tests
 
+NOPE. Start again (api is just not necessary for this test, as no one mentioned anything about scaling dude... and the styling is more dependent on the data than the other way around; get the data first)
+
+1. Get list of pokemon on the index page
+2. Create singular pokemon view page that fetches pokemon data by id
+3. Add the pokeapi caching wrapper (browser side, to eliminate unnecessary demand on the poor PokeAPI during development...)
+4. Add basic styling with Tailwind for rapid development
+5. Add a search feature to the index page
+6. Create a comparison page, that can compare by two searches
+7. On pokemon index cards, or detail cards, add a save feature that updates a localstorage list of favourite pokemon.
+8. Create favourite pokemon page that retrieves favourites from localstorage, than runs a chain of fetches to the api by id/name
+9. Add generation filter to index page
+
 # Implementation
 
 ## Getting started guide
