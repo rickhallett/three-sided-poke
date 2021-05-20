@@ -83,6 +83,8 @@ NOPE. Start again (api is just not necessary for this test, as no one mentioned 
 
 ## Challenges and solutions
 
+1. PokeAPI browser wrapper not accessible in compiled code (window/navigator undefined), so had to revert back to making a custom API.
+
 ## Extra features
 
 - Pokemon images

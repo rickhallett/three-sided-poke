@@ -24,6 +24,7 @@ Index.getInitialProps = async () => {
   const pokemon = await axios
     .get("https://pokeapi.co/api/v2/pokemon?limit=1000")
     .then((response) => response.data.results);
+
   return { pokemon };
 };
 
