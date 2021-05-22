@@ -21,11 +21,11 @@ const Index = ({ pokemon }) => {
 };
 
 Index.getInitialProps = async () => {
-  const pokemon = await axios
-    .get("https://pokeapi.co/api/v2/pokemon?limit=1000")
-    .then((response) => response.data.results);
+  const response = await axios
+    .get("http://localhost:3000/api/getPokemon")
+    .then((response) => response.data.raw);
 
-  return { pokemon };
+  return { pokemon: response.results };
 };
 
 export default Index;
