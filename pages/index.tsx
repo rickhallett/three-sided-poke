@@ -1,18 +1,22 @@
 import Head from "next/head";
+import Link from 'next/link';
 import axios from "axios";
+import React from 'react';
 
 type Pokemon = {
   name: string;
 };
 
-const Index = ({ pokemon }) => {
+const Index = ({ pokemon }): JSX.Element => {
   return (
     <div>
       Hello, Pokedex!
       {pokemon.map((pokemon: Pokemon, i: number) => {
         return (
-          <div key={i}>
-            {i + 1}:{pokemon.name}
+          <div>
+            <Link href={`/pokemon/${i + 1}`}>
+              <a key={i}>{i + 1}:{pokemon.name}</a>
+            </Link>
           </div>
         );
       })}
