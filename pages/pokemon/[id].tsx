@@ -1,53 +1,11 @@
-import { NextRouter, useRouter } from "next/router";
-import Image from 'next/image';
-import Link from 'next/link';
-import { ParsedUrlQuery } from "querystring";
+import Image from "next/image";
+import Link from "next/link";
 import axios from "axios";
-import fs from 'fs';
-
-export const createSpriteURI = (id: number) => {
-  return ``
-}
-
-type ResourceNameURI = {
-    name: string,
-    url: string
-  }
-
-  type Stat = {
-    base_stat: number,
-    effort: number,
-    stat: ResourceNameURI
-  }
-
-  type Ability = {
-    ability: ResourceNameURI,
-    is_hidden: boolean,
-    slot: number
-  }
-
-type Pokemon = {
-    name: string,
-    id: number,
-    height: number,
-    weight: number,
-    abilities: Ability[]
-    base_experience: number,
-    forms: ResourceNameURI[],
-    stats: Stat[],
-    moves?: [],
-    species?: [],
-    sprites?: {
-      front_default: string
-    }
-  }
+import { Pokemon, ResourceNameURI } from '../../types/pokemon.types';
 
 const Detail = ({ pokemon }: { pokemon: Pokemon }): JSX.Element => {
-
   if (!pokemon) {
-    return (
-      <div>No poke!</div>
-    )
+    return <div>No poke!</div>;
   }
 
   return (
@@ -69,15 +27,24 @@ const Detail = ({ pokemon }: { pokemon: Pokemon }): JSX.Element => {
           <li>Height: {pokemon.height}</li>
           <li>Height: {pokemon.weight}</li>
           {pokemon.stats.map((stat, i) => (
-            <li key={i}>{stat.stat.name}: {stat.base_stat}</li>))}
+            <li key={i}>
+              {stat.stat.name}: {stat.base_stat}
+            </li>
+          ))}
         </ul>
       </div>
       <div>
-        <Image src={`/images/sprites/${pokemon.id}.png`} height={200} width={200} />
+        <Image
+          src={`/images/sprites/${pokemon.id}.png`}
+          height={200}
+          width={200}
+        />
       </div>
       <Link href="/">Back</Link>
       <Link href={`/pokemon/${pokemon.id + 1}`}>Next</Link>
-      <Link href={pokemon.id === 1 ? '/' : `/pokemon/${pokemon.id - 1}`}>Home</Link>
+      <Link href={pokemon.id === 1 ? "/" : `/pokemon/${pokemon.id - 1}`}>
+        Home
+      </Link>
     </div>
   );
 };
@@ -91,9 +58,3 @@ Detail.getInitialProps = async ({ query }) => {
 };
 
 export default Detail;
-
-{
-  /* <a href={`http://localhost:3000/api/getPokemonById?id=${form.id}`}></a> */
-}
-
-// "front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png"
