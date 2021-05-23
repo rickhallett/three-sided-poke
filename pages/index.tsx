@@ -22,26 +22,34 @@ const Index = ({ pokemon }): JSX.Element => {
 
   return (
     <div>
-      Pokedex
-      <input
-        style={{ display: "block" }}
-        type="text"
-        onChange={(event) => onSearchInput(event)}
-        placeholder="Search"
-      />
+      <div className="text-center flex flex-col justify-center">
+        <header className="text-3xl text-gray-400 tracking-wider p-5 w-full">
+          Pokedex
+        </header>
+        <input
+          style={{ display: "block" }}
+          type="text"
+          onChange={(event) => onSearchInput(event)}
+          placeholder="Search"
+          className="text-center cursor-pointer w-200 focus:ring-1 focus:ring-gray-100"
+        />
+      </div>
+
       <hr />
-      <div className="flex flex-wrap">
-        {(searchActive ? filteredPokemonData : allPokemonData).map((pokemon: PokemonRef, i: number) => {
-          if (true || i < 50 && pokemon.name && pokemon.url) {
-            return (
-              <IndexCard
-                key={i}
-                name={pokemon.name}
-                id={pokemon.url.split("/")[6]}
-              />
-            );
+      <div className="flex flex-wrap justify-around mt-5">
+        {(searchActive ? filteredPokemonData : allPokemonData).map(
+          (pokemon: PokemonRef, i: number) => {
+            if (i < 25 && pokemon.name && pokemon.url) {
+              return (
+                <IndexCard
+                  key={i}
+                  name={pokemon.name}
+                  id={pokemon.url.split("/")[6]}
+                />
+              );
+            }
           }
-        })}
+        )}
       </div>
     </div>
   );
