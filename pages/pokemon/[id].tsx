@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ParsedUrlQuery } from "querystring";
 import axios from "axios";
+import fs from 'fs';
 
 export const createSpriteURI = (id: number) => {
   return ``
@@ -42,10 +43,11 @@ type Pokemon = {
   }
 
 const Detail = ({ pokemon }: { pokemon: Pokemon }): JSX.Element => {
+  const cachedImage = `/images/sprites/${pokemon.id}.png`;
+
   return (
     <div>
       <h1>
-        {pokemon.name}
         <span>#{pokemon.id}</span>
       </h1>
       <div>
@@ -66,9 +68,11 @@ const Detail = ({ pokemon }: { pokemon: Pokemon }): JSX.Element => {
         </ul>
       </div>
       <div>
-        <Image src={pokemon.sprites.front_default} height={200} width={200} />
+        <Image src={cachedImage} height={200} width={200} />
       </div>
       <Link href="/">Back</Link>
+      <Link href={`/pokemon/${pokemon.id + 1}`}>Next</Link>
+      <Link href={pokemon.id === 1 ? '/' : `/pokemon/${pokemon.id - 1}`}>Back</Link>
     </div>
   );
 };
