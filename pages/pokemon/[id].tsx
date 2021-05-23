@@ -28,14 +28,20 @@ type ResourceNameURI = {
 type Pokemon = {
     name: string,
     id: number,
+    height: number,
+    weight: number,
     abilities: Ability[]
     base_experience: number,
+    forms: ResourceNameURI[],
     stats: Stat[],
     moves?: [],
     species?: [],
+    sprites?: {
+      front_default: string
+    }
   }
 
-const Detail = ({ pokemon }): JSX.Element => {
+const Detail = ({ pokemon }: { pokemon: Pokemon }): JSX.Element => {
   return (
     <div>
       <h1>
@@ -45,7 +51,7 @@ const Detail = ({ pokemon }): JSX.Element => {
       <div>
         <h2>Forms</h2>
         <ul>
-          {pokemon.forms.map((form, i) => (
+          {pokemon.forms.map((form: ResourceNameURI, i) => (
             <li key={i}>{form.name}</li>
           ))}
         </ul>
