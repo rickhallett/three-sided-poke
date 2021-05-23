@@ -43,7 +43,12 @@ type Pokemon = {
   }
 
 const Detail = ({ pokemon }: { pokemon: Pokemon }): JSX.Element => {
-  const cachedImage = `/images/sprites/${pokemon.id}.png`;
+
+  if (!pokemon) {
+    return (
+      <div>No poke!</div>
+    )
+  }
 
   return (
     <div>
@@ -68,11 +73,11 @@ const Detail = ({ pokemon }: { pokemon: Pokemon }): JSX.Element => {
         </ul>
       </div>
       <div>
-        <Image src={cachedImage} height={200} width={200} />
+        <Image src={`/images/sprites/${pokemon.id}.png`} height={200} width={200} />
       </div>
       <Link href="/">Back</Link>
       <Link href={`/pokemon/${pokemon.id + 1}`}>Next</Link>
-      <Link href={pokemon.id === 1 ? '/' : `/pokemon/${pokemon.id - 1}`}>Back</Link>
+      <Link href={pokemon.id === 1 ? '/' : `/pokemon/${pokemon.id - 1}`}>Home</Link>
     </div>
   );
 };

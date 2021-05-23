@@ -19,7 +19,14 @@ const download_image = (url: string, image_path: string) =>
   );
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const pokemon = await poker.resource("/api/v2/pokemon/" + req.query.id);
+
+  let pokemon = null;
+
+  try {
+    pokemon = await poker.resource("/api/v2/pokemon/" + req.query.id);
+  } catch (error) {
+    return res.status(200).json({ raw: null });
+  }
 
   try {
     fs.readFileSync(`public/images/sprites/${pokemon.id}.png`);
@@ -30,6 +37,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       `public/images/sprites/${pokemon.id}.png`
     );
   }
-  
-  res.status(200).json({ raw: pokemon });
+
+  return res.status(200).json({ raw: pokemon });
 };
