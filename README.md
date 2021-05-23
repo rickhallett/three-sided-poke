@@ -92,3 +92,13 @@ NOPE. Start again (api is just not necessary for this test, as no one mentioned 
 - User [authentication](https://next-with-iron-session.vercel.app/), possibly with [NextAuth.js](https://github.com/nextauthjs/next-auth-example), register/login
 
 ## Feature wish-list
+
+
+
+{/* <div key={i} className="max-w-md rounded-xl shadow-md">
+            <Link href={`/pokemon/${i + 1}`}>
+              <a>
+                {i + 1}:{pokemon.name}
+              </a>
+            </Link>
+          </div> */}

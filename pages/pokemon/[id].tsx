@@ -48,11 +48,11 @@ const Detail = ({ pokemon }: { pokemon: Pokemon }): JSX.Element => {
           width={200}
         />
       </div>
-      <Link href="/">Back</Link>
-      <Link href={`/pokemon/${pokemon.id + 1}`}>Next</Link>
+      <Link href="/">Home</Link>
       <Link href={pokemon.id === 1 ? "/" : `/pokemon/${pokemon.id - 1}`}>
-        Home
+        prev
       </Link>
+      <Link href={`/pokemon/${pokemon.id + 1}`}>Next</Link>
     </div>
   );
 };

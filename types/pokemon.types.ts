@@ -15,6 +15,11 @@ export type Ability = {
   slot: number;
 };
 
+export type PokemonRef = {
+  name: string,
+  url: string
+};
+
 export type Pokemon = {
   name: string;
   id: number;
