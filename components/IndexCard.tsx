@@ -26,7 +26,7 @@ const IndexCard = (props) => {
       <div>{pokemonCard.name}</div>
       <div>{pokemonCard.id}</div>
       {/* <img src={pokemonCard.sprites.front_default}></img> */}
-      <img src={`/images/sprites/${pokemonCard.id}.png`}></img>
+      <img src={`/images/sprites/${pokemonCard.id}.png`} width={150}></img>
       <a href={`/pokemon/${pokemonCard.id + 1}`}>Detail</a>
     </div>
   );

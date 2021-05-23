@@ -2,19 +2,21 @@ import Head from "next/head";
 import Link from "next/link";
 import axios from "axios";
 import React, { useState } from "react";
-import { PokemonRef } from "../types/pokemon.types";
+import { Pokemon, PokemonRef } from "../types/pokemon.types";
 import IndexCard from '../components/IndexCard';
-import { prependOnceListener } from 'process';
 
 const Index = ({ pokemon }): JSX.Element => {
   const [allPokemonData, setAllData] = useState(pokemon);
   const [filteredPokemonData, setFilteredData] = useState(allPokemonData);
+  const [searchActive, setSearchActive] = useState(false);
 
   const onSearchInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const searchVal = event.target.value.toLowerCase();
+    setSearchActive(searchVal.length > 0);
     setFilteredData(
-      allPokemonData.filter((item) =>
-        item.name.search(event.target.value.toLowerCase()) !== -1
-      )
+      allPokemonData.filter((item: Pokemon) =>
+        item.name.search(searchVal) !== -1
+      ).sort((a: Pokemon, b: Pokemon) => a.id < b.id ? 1 : -1)
     );
   };
 
@@ -29,8 +31,8 @@ const Index = ({ pokemon }): JSX.Element => {
       />
       <hr />
       <div className="flex flex-wrap">
-        {filteredPokemonData.map((pokemon: PokemonRef, i: number) => {
-          if (i < 50 && pokemon.name && pokemon.url) {
+        {(searchActive ? filteredPokemonData : allPokemonData).map((pokemon: PokemonRef, i: number) => {
+          if (true || i < 50 && pokemon.name && pokemon.url) {
             return (
               <IndexCard
                 key={i}
