@@ -17,6 +17,7 @@
 
 # misc
 .DS_Store
+public/images/sprites/*png
 
 # debug
 npm-debug.log*

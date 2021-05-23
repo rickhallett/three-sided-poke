@@ -1,6 +1,7 @@
 import axios from "axios";
 import fs from "fs";
 import { NextApiRequest, NextApiResponse } from "next";
+import { tryGetPreviewData } from 'next/dist/next-server/server/api-utils';
 import poker from "./cacher";
 
 const download_image = (url: string, image_path: string) =>
@@ -19,6 +20,16 @@ const download_image = (url: string, image_path: string) =>
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const pokemon = await poker.resource("/api/v2/pokemon/" + req.query.id);
-  const a = await download_image(pokemon.sprites.front_default, `public/images/sprites/${pokemon.id}.png`);
+
+  try {
+    fs.readFileSync(`public/images/sprites/${pokemon.id}.png`);
+  } catch (error) {
+    console.info(`Sprite ${pokemon.id} not downloaded. Fetching...`);
+    await download_image(
+      pokemon.sprites.front_default,
+      `public/images/sprites/${pokemon.id}.png`
+    );
+  }
+  
   res.status(200).json({ raw: pokemon });
 };
