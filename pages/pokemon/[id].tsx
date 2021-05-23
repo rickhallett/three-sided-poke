@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
-import { Pokemon, ResourceNameURI } from '../../types/pokemon.types';
+import { Pokemon, ResourceNameURI } from "../../types/pokemon.types";
 
 const Detail = ({ pokemon }: { pokemon: Pokemon }): JSX.Element => {
   if (!pokemon) {
@@ -30,6 +30,14 @@ const Detail = ({ pokemon }: { pokemon: Pokemon }): JSX.Element => {
             <li key={i}>
               {stat.stat.name}: {stat.base_stat}
             </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h2>Abilities</h2>
+        <ul>
+          {pokemon.abilities.map((ab, i) => (
+            <li key={i}>{ab.ability.name}</li>
           ))}
         </ul>
       </div>
