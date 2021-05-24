@@ -41,6 +41,12 @@ const Index = ({ pokemon }): JSX.Element => {
       <hr />
       <div className="flex flex-wrap justify-around mt-5">
         {filteredPokemonData.map((pokemon: PokemonRef, i: number) => {
+          // TODO: implement render guard
+          // if (!pokemon) {
+          //   return (
+          //     <div className="text-center p-1 m-1 border-solid border-4 border-gray-50 rounded-2xl shadow-lg hover:border-gray-100 hover:bg-gray-100">?<div>
+          //   )
+          // }
           return (
             <IndexCard
               key={i + pokemon.name}
