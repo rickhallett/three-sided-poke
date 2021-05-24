@@ -85,18 +85,24 @@ NOPE. Start again (api is just not necessary for this test, as no one mentioned 
 
 1. PokeAPI browser wrapper not accessible in compiled code (window/navigator undefined), so had to revert back to making a custom API.
 2. When implementing the search feature, I ran into a bunch of interconnected problems that initially looking like a React hook memory leak or performance issue, due to the number of fetch requests. After a long time debugging in the console - just process of elimination - I eventually realised that the React 'key' prop was storing elements in the shadow DOM based on the map index; concating this property into { name + index } created a unique key allowing for more shadow DOM elements.
-3. The http load on the Index page is very high; I attempted to solve this with a combination of caching responses on the backend, and loading sprite png into the Next.js public file directory. [Browser caching](https://github.com/PokeAPI/pokeapi-js-wrapper) looked to be a good solution initially, but there was many problems getting Typescript to accept window/navigator interfaces. Eventually I had to leave this approach as it was taking up too much time.
+3. The http load on the Index page is very high; I attempted to solve this with a combination of caching responses on the backend, and loading sprite png into the Next.js public file directory. [Browser caching](https://github.com/PokeAPI/pokeapi-js-wrapper) looked to be a good solution initially, but there was many problems getting Typescript to accept window/navigator interfaces. Eventually I had to leave this approach as it was taking up too much time; at least for demo'ing the project, keeping some static assets in the public directory didn't seem to be a bad trade off given they are only 1kb each.
 4. Despite the Next.js docs showing that the useRouter() hook can be used within event handlers, this causes a React inappropriate use of hooks error. I worked around this, for the time being, by simply using the browser API. Which feels distinctly non-SPA like, but there ya go...
 
-5. Index.tsx BUG (on refresh/hot-reload, intermittently)
+5. IndexCard.tsx BUG (on refresh/hot-reload, intermittently)
 
 ```
 Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.
 ```
 
+This was fixed by implementing a custom 'mounted' guard within the useEffect of IndexCard; if the component is no longer mounted when the fetch request completes, the response no longer attemmpts to map to this component.
+
 6. Index.tsx long page load times unless purely coming from cache. Ideally, I would like the time to implement pagination, but for now I provided a render limit input on the UI which defaults to a low enough number so as to give a good initial page loading time. It is debatable whether a user really needs a page with all the pokemon on at once anyway. This may be taking 'gotta catch them all' a little too seriously...
 
 7. Next.js maps one handler per api route; to get this to respond to different methods, it requires a req.method check in that handler. I would prefer a more restful approach, but for an app of this size it isn't so important.
+
+8. Finding out half way through an implementation plan that 'window' is only recognised in React function components that are called from event handlers (different context to the function alone)
+
+9. Big difficulty in establishing a way that React can monitor the state of an object that tracks which pokemon are favourited. Tried all manner of combinations of useState, useEffect and custom data structures. This is simply just a lack of experience with React, which then created a bunch of hacky code to try and find a workaround, but likely defeats the entire point of using React in the first place.
 
 ## Extra features
 
@@ -105,3 +111,5 @@ Warning: Can't perform a React state update on an unmounted component. This is a
 - User [authentication](https://next-with-iron-session.vercel.app/), possibly with [NextAuth.js](https://github.com/nextauthjs/next-auth-example), register/login
 
 ## Feature wish-list
+
+- Make the app TS compliant all the way through for readability and better type safety (props, events etc)

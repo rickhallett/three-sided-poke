@@ -34,10 +34,9 @@ export type Pokemon = {
   sprites?: {
     front_default: string;
   };
+  favourite?: boolean;
 };
 
 declare global {
-  interface Window {
- 
-  }
+  interface Window {}
 }

@@ -64,6 +64,22 @@ function MyApp({ Component, pageProps }: AppProps) {
                       Detail
                     </a>
                   </li>
+                  <li>
+                    <a
+                      className="inline-block no-underline hover:text-black hover:underline py-2 px-4"
+                      href="/favourites"
+                    >
+                      Favourites
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      className="inline-block no-underline hover:text-black hover:underline py-2 px-4"
+                      href="/battleArena"
+                    >
+                      Battle Arena
+                    </a>
+                  </li>
                 </ul>
               </nav>
             </div>

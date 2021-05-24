@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
-import { Pokemon } from "../../types/pokemon.types";
+import { Pokemon } from "../../inferfaces/pokemon.types";
 import React from "react";
 
 const Detail = ({ pokemon }: { pokemon: Pokemon }): JSX.Element => {
@@ -14,7 +14,7 @@ const Detail = ({ pokemon }: { pokemon: Pokemon }): JSX.Element => {
 
   return (
     <React.Fragment>
-      <div className="w-1/2 mx-auto sm:w-full flex-col text-center p-1 m-1 border-solid border-4 border-gray-50 rounded-2xl shadow-lg hover:border-gray-100 hover:bg-gray-100">
+      <div className="bg-white w-1/2 mx-auto sm:w-full flex-col text-center p-1 m-1 border-solid border-4 border-gray-50 rounded-2xl shadow-lg">
         <div className="flex w-full justify-between p-3">
           <div className="text-base sm:text-3xl text-gray-600 tracking-wider">
             {pokemon.name}

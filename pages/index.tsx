@@ -1,11 +1,12 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { PokemonRef } from "../types/pokemon.types";
+import { Pokemon, PokemonRef } from "../inferfaces/pokemon.types";
 import IndexCard from "../components/IndexCard";
 
 const Index = ({ pokemon, generations }): JSX.Element => {
-  const [allPokemonData, setAllData] = useState(pokemon);
-  const [filteredPokemonData, setFilteredData] = useState(allPokemonData);
+  const [allPokemonData, setAllData] = useState<PokemonRef[]>(pokemon);
+  const [filteredPokemonData, setFilteredData] =
+    useState<PokemonRef[]>(allPokemonData);
   const [renderLimit, setRenderLimit] = useState(5);
 
   const onSearchInput = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,8 +27,6 @@ const Index = ({ pokemon, generations }): JSX.Element => {
     const pokemonByGeneration = await axios.get(
       `${generations.find((gen) => gen.name === event.target.value).url}`
     );
-
-    console.log("pokemonByGeneration", pokemonByGeneration);
 
     setFilteredData(
       pokemonByGeneration.data.pokemon_species ||
