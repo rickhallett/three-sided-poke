@@ -20,8 +20,6 @@ const Index = ({ pokemon }): JSX.Element => {
           parseInt(a.url.split("/")[6]) > parseInt(b.url.split("/")[6]) ? 1 : -1
         )
     );
-
-    console.log("filteredPokemonData", filteredPokemonData);
   };
 
   return (
@@ -43,7 +41,6 @@ const Index = ({ pokemon }): JSX.Element => {
       <hr />
       <div className="flex flex-wrap justify-around mt-5">
         {filteredPokemonData.map((pokemon: PokemonRef, i: number) => {
-          // if (i <= 50) {
           return (
             <IndexCard
               key={i + pokemon.name}
@@ -51,7 +48,6 @@ const Index = ({ pokemon }): JSX.Element => {
               id={pokemon.url.split("/")[6]}
             />
           );
-          // }
         })}
       </div>
     </div>

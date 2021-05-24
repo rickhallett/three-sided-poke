@@ -12,10 +12,15 @@ const IndexCard = (props) => {
 
   useEffect(() => {
     const fetchData = async () => {
+      const source = axios.CancelToken.source();
       const result = await axios.get(
-        `http://localhost:3000/api/getPokemonById?id=${props.id}`
+        `http://localhost:3000/api/getPokemonById?id=${props.id}`,
+        { cancelToken: source.token }
       );
+
       await setPokemonCard(result.data.raw);
+
+      return () => source.cancel();
     };
 
     fetchData();
