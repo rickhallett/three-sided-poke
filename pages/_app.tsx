@@ -20,7 +20,10 @@ function MyApp({ Component, pageProps }: AppProps) {
           ></img>
         </a>
 
-        <nav id="header" className="w-full z-30 top-0 py-1">
+        <nav
+          id="header"
+          className="w-full sm:w-11/12 md:w-full z-30 top-0 py-1"
+        >
           <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-6 py-3">
             <label
               htmlFor="menu-toggle"
