@@ -23,9 +23,11 @@ const Index = ({ pokemon }): JSX.Element => {
   return (
     <div>
       <div className="text-center flex flex-col justify-center">
+
         <header className="text-3xl text-gray-400 tracking-wider p-5 w-full">
           Pokedex
         </header>
+
         <input
           style={{ display: "block" }}
           type="text"
@@ -33,6 +35,7 @@ const Index = ({ pokemon }): JSX.Element => {
           placeholder="Search"
           className="text-center cursor-pointer w-200 focus:ring-1 focus:ring-gray-100"
         />
+
       </div>
 
       <hr />

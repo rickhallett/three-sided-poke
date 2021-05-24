@@ -16,8 +16,8 @@ export type Ability = {
 };
 
 export type PokemonRef = {
-  name: string,
-  url: string
+  name: string;
+  url: string;
 };
 
 export type Pokemon = {
@@ -35,3 +35,9 @@ export type Pokemon = {
     front_default: string;
   };
 };
+
+declare global {
+  interface Window {
+ 
+  }
+}
