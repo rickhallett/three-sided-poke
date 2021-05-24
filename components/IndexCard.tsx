@@ -1,6 +1,5 @@
-import React, { useState, useEffect, MouseEvent } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useRouter } from "next/dist/client/router";
 
 const IndexCard = (props) => {
   const [pokemonCard, setPokemonCard] = useState({

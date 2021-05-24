@@ -1,15 +1,11 @@
-import Head from "next/head";
-import Link from "next/link";
 import axios from "axios";
 import React, { useState } from "react";
-import { Pokemon, PokemonRef } from "../types/pokemon.types";
+import { PokemonRef } from "../types/pokemon.types";
 import IndexCard from "../components/IndexCard";
 
-const Index = ({ pokemon }): JSX.Element => {
+const Index = ({ pokemon, generations }): JSX.Element => {
   const [allPokemonData, setAllData] = useState(pokemon);
   const [filteredPokemonData, setFilteredData] = useState(allPokemonData);
-  const [searchActive, setSearchActive] = useState(false);
-  const [generationFilter, setGenerationFilter] = useState([]);
   const [renderLimit, setRenderLimit] = useState(5);
 
   const onSearchInput = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,59 +27,11 @@ const Index = ({ pokemon }): JSX.Element => {
       `${generations.find((gen) => gen.name === event.target.value).url}`
     );
 
-    // debugger;
-    // console.log(pokemonByGeneration.data.pokemon_species);
-
-    await setAllData(pokemonByGeneration.data.pokemon_species);
-    await setFilteredData(pokemonByGeneration.data.pokemon_species);
+    setFilteredData(pokemonByGeneration.data.pokemon_species);
   };
 
-  const onRenderLimitChange = async (event) => {
-    // const response = await axios.post(
-    //   `http://localhost:3000/api/getPokemon?limit=${event.target.value}`
-    // );
-    // console.log(response);
+  const onRenderLimitChange = async (event) =>
     setRenderLimit(event.target.value);
-  };
-
-  const generations = [
-    {
-      name: "Choose a generation..",
-      url: "https://pokeapi.co/api/v2/generation/1/",
-    },
-    {
-      name: "generation-i",
-      url: "https://pokeapi.co/api/v2/generation/1/",
-    },
-    {
-      name: "generation-ii",
-      url: "https://pokeapi.co/api/v2/generation/2/",
-    },
-    {
-      name: "generation-iii",
-      url: "https://pokeapi.co/api/v2/generation/3/",
-    },
-    {
-      name: "generation-iv",
-      url: "https://pokeapi.co/api/v2/generation/4/",
-    },
-    {
-      name: "generation-v",
-      url: "https://pokeapi.co/api/v2/generation/5/",
-    },
-    {
-      name: "generation-vi",
-      url: "https://pokeapi.co/api/v2/generation/6/",
-    },
-    {
-      name: "generation-vii",
-      url: "https://pokeapi.co/api/v2/generation/7/",
-    },
-    {
-      name: "generation-viii",
-      url: "https://pokeapi.co/api/v2/generation/8/",
-    },
-  ];
 
   return (
     <div>
@@ -127,32 +75,37 @@ const Index = ({ pokemon }): JSX.Element => {
         </div>
       </div>
       <div className="flex flex-wrap justify-around mt-5">
-        {filteredPokemonData.map((pokemon: PokemonRef, i: number) => {
-          // TODO: implement render guard
-          // if (!pokemon) {
-          //   return (
-          //     <div className="text-center p-1 m-1 border-solid border-4 border-gray-50 rounded-2xl shadow-lg hover:border-gray-100 hover:bg-gray-100">?<div>
-          //   )
-          // }
-          return i < renderLimit ? (
-            <IndexCard
-              key={i + pokemon.name}
-              name={pokemon.name}
-              id={pokemon.url.split("/")[6]}
-            />
-          ) : null;
-        })}
+        {filteredPokemonData && filteredPokemonData.length > 0
+          ? filteredPokemonData.map((pokemon: PokemonRef, i: number) => {
+              return i < renderLimit ? (
+                <IndexCard
+                  key={i + pokemon.name}
+                  name={pokemon.name}
+                  id={pokemon.url.split("/")[6]}
+                />
+              ) : null;
+            })
+          : null}
       </div>
     </div>
   );
 };
 
 Index.getInitialProps = async () => {
-  const response = await axios
+  const pokemonData = await axios
     .get("http://localhost:3000/api/getPokemon")
     .then((response) => response.data.raw);
 
-  return { pokemon: response.results };
+  const generations = await axios
+    .get("https://pokeapi.co/api/v2/generation")
+    .then((response) => response.data.results);
+
+  generations.unshift({
+    name: "Choose a generation..",
+    url: "https://pokeapi.co/api/v2/pokemon",
+  });
+
+  return { pokemon: pokemonData.results, generations };
 };
 
 export default Index;

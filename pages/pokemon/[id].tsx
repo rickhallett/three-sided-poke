@@ -1,12 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
-import { Pokemon, ResourceNameURI } from "../../types/pokemon.types";
+import { Pokemon } from "../../types/pokemon.types";
 import React from "react";
 
 const Detail = ({ pokemon }: { pokemon: Pokemon }): JSX.Element => {
   if (!pokemon) {
-    return <div>No poke!</div>;
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 3000);
+    return <div>No pokemon! Redirecting back to Index...</div>;
   }
 
   return (
@@ -23,6 +26,16 @@ const Detail = ({ pokemon }: { pokemon: Pokemon }): JSX.Element => {
           <div>
             {/* <img src={pokemon.sprites.front_default}></img> */}
             <img
+              src={pokemon.sprites.front_default}
+              width={300}
+              className="mx-auto hidden sm:block"
+            ></img>
+            <img
+              src={pokemon.sprites.front_default}
+              width={150}
+              className="mx-auto sm:hidden"
+            ></img>
+            {/* <img
               src={`/images/sprites/${pokemon.id}.png`}
               width={300}
               className="mx-auto hidden sm:block"
@@ -31,7 +44,7 @@ const Detail = ({ pokemon }: { pokemon: Pokemon }): JSX.Element => {
               src={`/images/sprites/${pokemon.id}.png`}
               width={150}
               className="mx-auto sm:hidden"
-            ></img>
+            ></img> */}
           </div>
           <div className="text-center my-auto text-sm md:text-lg">
             <ul>

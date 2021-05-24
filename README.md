@@ -94,6 +94,9 @@ NOPE. Start again (api is just not necessary for this test, as no one mentioned 
 Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.
 ```
 
+6. Index.tsx long page load times unless purely coming from cache. Ideally, I would like the time to implement pagination, but for now I provided a render limit input on the UI which defaults to a low enough number so as to give a good initial page loading time. It is debatable whether a user really needs a page with all the pokemon on at once anyway. This may be taking 'gotta catch them all' a little too seriously...
+
+
 ## Extra features
 
 - Pokemon images
