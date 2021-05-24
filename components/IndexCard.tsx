@@ -41,31 +41,24 @@ const IndexCard = (props) => {
 
   return (
     <div
-      className="text-center p-1 m-2 border-solid border-4 border-gray-50 rounded-2xl shadow-lg hover:border-gray-100 hover:bg-gray-100 cursor-pointer min-h-card min-w-card"
+      className="bg-white text-center p-1 m-2 border-solid border-4 border-gray-50 rounded-2xl shadow-lg hover:border-gray-100 hover:bg-gray-100 cursor-pointer min-h-card min-w-card opacity=100"
       onClick={(event) => handleClick(event, pokemonCard.id)}
     >
       <div className="flex justify-between p-3">
-        <div className="text-gray-600 tracking-wider">{pokemonCard.name}</div>
+        <div className="text-gray-600 tracking-wider">
+          {pokemonCard ? pokemonCard.name : null}
+        </div>
         <div className="text-3xl font-bold text-blue-300">
-          #{pokemonCard.id}
+          #{pokemonCard ? pokemonCard.id : null}
         </div>
       </div>
-      {/* <img src={pokemonCard.sprites.front_default}></img> */}
       <img
-        src={`/images/sprites/${pokemonCard.id}.png`}
+        src={`/images/sprites/${pokemonCard ? pokemonCard.id : null}.png`}
         width={150}
         className="mx-auto"
       ></img>
-      {/* <a
-        className="text-gray-400 cursor-pointer"
-        href={`/pokemon/${pokemonCard.id}`}
-      >
-        more...
-      </a> */}
     </div>
   );
 };
-
-// IndexCard.getInitialProps = async () => {};
 
 export default IndexCard;
