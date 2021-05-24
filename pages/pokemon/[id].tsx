@@ -25,26 +25,26 @@ const Detail = ({ pokemon }: { pokemon: Pokemon }): JSX.Element => {
         <div className="flex flex-col sm:flex-row-reverse justify-center">
           <div>
             {/* <img src={pokemon.sprites.front_default}></img> */}
-            <img
-              src={pokemon.sprites.front_default}
-              width={300}
-              className="mx-auto hidden sm:block"
-            ></img>
-            <img
-              src={pokemon.sprites.front_default}
-              width={150}
-              className="mx-auto sm:hidden"
-            ></img>
             {/* <img
-              src={`/images/sprites/${pokemon.id}.png`}
+              src={pokemon.sprites.front_default}
               width={300}
               className="mx-auto hidden sm:block"
             ></img>
             <img
-              src={`/images/sprites/${pokemon.id}.png`}
+              src={pokemon.sprites.front_default}
               width={150}
               className="mx-auto sm:hidden"
             ></img> */}
+            <img
+              src={`/images/sprites/${pokemon.id}.png`}
+              width={300}
+              className="mx-auto hidden sm:block"
+            ></img>
+            <img
+              src={`/images/sprites/${pokemon.id}.png`}
+              width={150}
+              className="mx-auto sm:hidden"
+            ></img>
           </div>
           <div className="text-center my-auto text-sm md:text-lg">
             <ul>

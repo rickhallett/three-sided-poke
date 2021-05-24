@@ -27,7 +27,12 @@ const Index = ({ pokemon, generations }): JSX.Element => {
       `${generations.find((gen) => gen.name === event.target.value).url}`
     );
 
-    setFilteredData(pokemonByGeneration.data.pokemon_species);
+    console.log("pokemonByGeneration", pokemonByGeneration);
+
+    setFilteredData(
+      pokemonByGeneration.data.pokemon_species ||
+        pokemonByGeneration.data.results
+    );
   };
 
   const onRenderLimitChange = async (event) =>
@@ -101,7 +106,7 @@ Index.getInitialProps = async () => {
     .then((response) => response.data.results);
 
   generations.unshift({
-    name: "Choose a generation..",
+    name: "Choose a generation...",
     url: "https://pokeapi.co/api/v2/pokemon",
   });
 

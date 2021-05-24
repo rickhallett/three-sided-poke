@@ -96,6 +96,7 @@ Warning: Can't perform a React state update on an unmounted component. This is a
 
 6. Index.tsx long page load times unless purely coming from cache. Ideally, I would like the time to implement pagination, but for now I provided a render limit input on the UI which defaults to a low enough number so as to give a good initial page loading time. It is debatable whether a user really needs a page with all the pokemon on at once anyway. This may be taking 'gotta catch them all' a little too seriously...
 
+7. Next.js maps one handler per api route; to get this to respond to different methods, it requires a req.method check in that handler. I would prefer a more restful approach, but for an app of this size it isn't so important.
 
 ## Extra features
 

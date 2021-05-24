@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const IndexCard = (props) => {
+  if (!props.id) {
+    return <div>?</div>;
+  }
+
   const [pokemonCard, setPokemonCard] = useState({
     name: props.name,
     id: props.id,
@@ -10,7 +14,8 @@ const IndexCard = (props) => {
     },
   });
 
-  useEffect(() => {
+  useEffect((): any => {
+    let mounted = true;
     const fetchData = async () => {
       const source = axios.CancelToken.source();
       const result = await axios.get(
@@ -18,12 +23,16 @@ const IndexCard = (props) => {
         { cancelToken: source.token }
       );
 
-      await setPokemonCard(result.data.raw);
+      if (mounted) {
+        setPokemonCard(result.data.raw);
+      }
 
       return () => source.cancel();
     };
 
     fetchData();
+
+    return () => (mounted = false);
   }, []);
 
   const handleClick = (event: React.MouseEvent<HTMLDivElement>, id: number) => {
