@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Link from "next/link";
-import poker from "../pages/api/cacher";
 
 const IndexCard = (props) => {
   const [pokemonCard, setPokemonCard] = useState({
