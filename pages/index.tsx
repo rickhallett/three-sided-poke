@@ -69,7 +69,6 @@ const Index = ({ pokemon, generations }): JSX.Element => {
           </svg>
           <select
             className="border-2 border-gray-300 rounded-full text-gray-400 h-10 pl-5 pr-10 bg-white text-sm hover:border-gray-400 focus:outline-none appearance-none"
-            // onSelect={(event) => handleGenerationSelect(event)}
             onInput={(event) => handleGenerationSelect(event)}
           >
             {generations.map((generation, i) => (

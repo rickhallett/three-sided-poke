@@ -113,3 +113,4 @@ This was fixed by implementing a custom 'mounted' guard within the useEffect of 
 ## Feature wish-list
 
 - Make the app TS compliant all the way through for readability and better type safety (props, events etc)
+- Deprecate the parts of the UI couples to the local api routes; over time this form of caching has become a lot less important, and can be phased out for browser calls to the original pokeAPI
