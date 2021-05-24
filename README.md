@@ -84,6 +84,15 @@ NOPE. Start again (api is just not necessary for this test, as no one mentioned 
 ## Challenges and solutions
 
 1. PokeAPI browser wrapper not accessible in compiled code (window/navigator undefined), so had to revert back to making a custom API.
+2. When implementing the search feature, I ran into a bunch of interconnected problems that initially looking like a React hook memory leak or performance issue, due to the number of fetch requests. After a long time debugging in the console - just process of elimination - I eventually realised that the React 'key' prop was storing elements in the shadow DOM based on the map index; concating this property into { name + index } created a unique key allowing for more shadow DOM elements.
+3. The http load on the Index page is very high; I attempted to solve this with a combination of caching responses on the backend, and loading sprite png into the Next.js public file directory. [Browser caching](https://github.com/PokeAPI/pokeapi-js-wrapper) looked to be a good solution initially, but there was many problems getting Typescript to accept window/navigator interfaces. Eventually I had to leave this approach as it was taking up too much time.
+4. Despite the Next.js docs showing that the useRouter() hook can be used within event handlers, this causes a React inappropriate use of hooks error. I worked around this, for the time being, by simply using the browser API. Which feels distinctly non-SPA like, but there ya go...
+
+5. Index.tsx BUG (on refresh/hot-reload, intermittently)
+
+```
+Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.
+```
 
 ## Extra features
 
@@ -92,13 +101,3 @@ NOPE. Start again (api is just not necessary for this test, as no one mentioned 
 - User [authentication](https://next-with-iron-session.vercel.app/), possibly with [NextAuth.js](https://github.com/nextauthjs/next-auth-example), register/login
 
 ## Feature wish-list
-
-
-
-{/* <div key={i} className="max-w-md rounded-xl shadow-md">
-            <Link href={`/pokemon/${i + 1}`}>
-              <a>
-                {i + 1}:{pokemon.name}
-              </a>
-            </Link>
-          </div> */}

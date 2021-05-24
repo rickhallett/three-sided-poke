@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, MouseEvent } from "react";
 import axios from "axios";
+import { useRouter } from "next/dist/client/router";
 
 const IndexCard = (props) => {
   const [pokemonCard, setPokemonCard] = useState({
@@ -26,8 +27,15 @@ const IndexCard = (props) => {
     fetchData();
   }, []);
 
+  const handleClick = (event: React.MouseEvent<HTMLDivElement>, id: number) => {
+    window.location.href = `/pokemon/${id}`;
+  };
+
   return (
-    <div className="text-center p-1 m-2 border-solid border-4 border-gray-50 rounded-2xl shadow-lg hover:border-gray-100 hover:bg-gray-100">
+    <div
+      className="text-center p-1 m-2 border-solid border-4 border-gray-50 rounded-2xl shadow-lg hover:border-gray-100 hover:bg-gray-100 cursor-pointer min-h-card min-w-card"
+      onClick={(event) => handleClick(event, pokemonCard.id)}
+    >
       <div className="flex justify-between p-3">
         <div className="text-gray-600 tracking-wider">{pokemonCard.name}</div>
         <div className="text-3xl font-bold text-blue-300">
@@ -40,12 +48,12 @@ const IndexCard = (props) => {
         width={150}
         className="mx-auto"
       ></img>
-      <a
+      {/* <a
         className="text-gray-400 cursor-pointer"
         href={`/pokemon/${pokemonCard.id}`}
       >
         more...
-      </a>
+      </a> */}
     </div>
   );
 };
