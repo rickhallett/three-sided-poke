@@ -1,6 +1,6 @@
-const imgRe =
+var imgRe =
   /https:\/\/raw\.githubusercontent\.com\/PokeAPI\/sprites\/[\/-\w\d]+\/[\d\w-]+\.(?:png|svg|gif)/;
-const version = 1;
+var version = 1;
 
 self.addEventListener("fetch", function (event) {
   if (event.request.url.match(imgRe)) {

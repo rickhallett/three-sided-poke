@@ -1,11 +1,10 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Pokemon, PokemonRef } from "../inferfaces/pokemon.types";
 import IndexCard from "../components/IndexCard";
 import { LOCAL_URI, REMOTE_URI } from "../config/config";
 
 const Index = ({ pokemon, generations }): JSX.Element => {
-  console.log("Index props", pokemon);
   const [allPokemonData, setAllData] = useState<PokemonRef[]>(pokemon);
   const [filteredPokemonData, setFilteredData] =
     useState<PokemonRef[]>(allPokemonData);
@@ -24,8 +23,6 @@ const Index = ({ pokemon, generations }): JSX.Element => {
   };
 
   const handleGenerationSelect = async (event: any) => {
-    console.log(event.target.value);
-
     const pokemonByGeneration = await axios.get(
       `${generations.find((gen) => gen.name === event.target.value).url}`
     );
@@ -39,7 +36,9 @@ const Index = ({ pokemon, generations }): JSX.Element => {
   const onRenderLimitChange = async (event) =>
     setRenderLimit(event.target.value);
 
-  console.log("allPokemonData", allPokemonData);
+  useEffect(() => {
+
+  }, [])
 
   return (
     <div>
@@ -84,9 +83,9 @@ const Index = ({ pokemon, generations }): JSX.Element => {
       <div className="flex flex-wrap justify-around mt-5">
         {filteredPokemonData && filteredPokemonData.length > 0
           ? filteredPokemonData.map((pokemon: PokemonRef, i: number) => {
-              i < renderLimit
-                ? console.log("pass in this to IndexCard...", pokemon)
-                : null;
+              // i < renderLimit
+              //   ? console.log("pass in this to IndexCard...", pokemon)
+              //   : null;
               return i < renderLimit ? (
                 <IndexCard
                   key={i + pokemon.name}
@@ -114,8 +113,6 @@ Index.getInitialProps = async () => {
     name: "Choose a generation...",
     url: REMOTE_URI.GET_POKEMON,
   });
-
-  console.log({ pokemon: pokemonData.results, generations });
 
   return { pokemon: pokemonData.results, generations };
 };

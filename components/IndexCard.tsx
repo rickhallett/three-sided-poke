@@ -22,8 +22,6 @@ const IndexCard = (props) => {
     return <div>No poke!</div>;
   }
 
-  console.log("IndexCard props", props);
-
   const [pokemonCard, setPokemonCard] = useState<Partial<Pokemon>>({
     name: props.name,
     id: props.id,
@@ -157,8 +155,6 @@ const IndexCard = (props) => {
     fetchLocalStorage();
   };
 
-  console.log("pokemon?", pokemonCard);
-
   if (pokemonCard) {
     return (
       <div
@@ -175,8 +171,6 @@ const IndexCard = (props) => {
       </div>
     );
   }
-
-  console.log("no pokemon...?", pokemonCard);
 
   if (!pokemonCard) {
     return (
