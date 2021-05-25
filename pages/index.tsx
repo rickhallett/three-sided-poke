@@ -2,13 +2,13 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Pokemon, PokemonRef } from "../inferfaces/pokemon.types";
 import IndexCard from "../components/IndexCard";
-import { LOCAL_URI, REMOTE_URI } from '../config/config';
+import { LOCAL_URI, REMOTE_URI } from "../config/config";
 
 const Index = ({ pokemon, generations }): JSX.Element => {
   const [allPokemonData, setAllData] = useState<PokemonRef[]>(pokemon);
   const [filteredPokemonData, setFilteredData] =
     useState<PokemonRef[]>(allPokemonData);
-  const [renderLimit, setRenderLimit] = useState(5);
+  const [renderLimit, setRenderLimit] = useState(20);
 
   const onSearchInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const searchVal = event.target.value.toLowerCase();
