@@ -6,6 +6,7 @@ import { printLocalStorage } from "../util/debug";
 import { LOCAL_URI, LOCAL_STORAGE } from "../config/config";
 import { IndexCardSprite } from "./IndexCardSprite";
 import { IndexCardSave } from "./IndexCardSave";
+import AlertModal from "./AlertModal";
 
 let fetchLocalStorage;
 
@@ -31,23 +32,26 @@ const IndexCard = (props) => {
     favourite: false,
   });
 
+  const [showModal, setShowModel] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+
+  const handleCloseModal = (event) => {
+    event.stopPropagation();
+    setModalMessage("");
+    setShowModel(false);
+  };
+
   let testMap = {};
 
   resetMap(testMap);
 
   const [isFavourite, setIsFavourite] = useState(testMap);
 
-  const [_, forceUpdate] = useReducer((x) => x + 1, 0);
-
   useEffect((): any => {
     let mounted = {
       data: true,
     };
 
-    /**
-     * fetchData()
-     * @returns
-     */
     const fetchData = async () => {
       const source = axios.CancelToken.source();
       const result = await axios.get(
@@ -62,9 +66,6 @@ const IndexCard = (props) => {
       return () => source.cancel();
     };
 
-    /**
-     * fetchLocalStorage()
-     */
     fetchLocalStorage = async () => {
       const browserFavouritesStore = window.localStorage.getItem(
         LOCAL_STORAGE.FAVOURITES
@@ -101,7 +102,6 @@ const IndexCard = (props) => {
 
   const handlePokemonSave = (event: any, pokemonCard) => {
     event.stopPropagation();
-    forceUpdate();
 
     const browserFavouritesStore = window.localStorage.getItem(
       LOCAL_STORAGE.FAVOURITES
@@ -137,9 +137,10 @@ const IndexCard = (props) => {
       );
 
       printLocalStorage("updated store - substracted");
-      alert(`${pokemonCard.name} saved!`);
+      // alert(`${pokemonCard.name} saved!`);
+      setModalMessage(`${pokemonCard.name} removed!`);
+      setShowModel(true);
 
-      forceUpdate();
       return;
     }
 
@@ -151,6 +152,9 @@ const IndexCard = (props) => {
     );
 
     printLocalStorage("updated store - added");
+
+    setModalMessage(`${pokemonCard.name} saved!`);
+    setShowModel(true);
 
     fetchLocalStorage();
   };
@@ -168,6 +172,9 @@ const IndexCard = (props) => {
           isFavourite={isFavourite}
           handlePokemonSave={handlePokemonSave}
         />
+        {showModal && (
+          <AlertModal message={modalMessage} closeModal={handleCloseModal} />
+        )}
       </div>
     );
   }

@@ -4,6 +4,7 @@ import { Pokemon, PokemonRef } from "../inferfaces/pokemon.types";
 import IndexCard from "../components/IndexCard";
 import { LOCAL_URI, REMOTE_URI } from "../config/config";
 
+
 const Index = ({ pokemon, generations }): JSX.Element => {
   const [allPokemonData, setAllData] = useState<PokemonRef[]>(pokemon);
   const [filteredPokemonData, setFilteredData] =
@@ -36,9 +37,7 @@ const Index = ({ pokemon, generations }): JSX.Element => {
   const onRenderLimitChange = async (event) =>
     setRenderLimit(event.target.value);
 
-  useEffect(() => {
-
-  }, [])
+  useEffect(() => {}, []);
 
   return (
     <div>
@@ -96,6 +95,7 @@ const Index = ({ pokemon, generations }): JSX.Element => {
             })
           : null}
       </div>
+      
     </div>
   );
 };
