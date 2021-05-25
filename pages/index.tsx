@@ -5,6 +5,7 @@ import IndexCard from "../components/IndexCard";
 import { LOCAL_URI, REMOTE_URI } from "../config/config";
 
 const Index = ({ pokemon, generations }): JSX.Element => {
+  console.log("Index props", pokemon);
   const [allPokemonData, setAllData] = useState<PokemonRef[]>(pokemon);
   const [filteredPokemonData, setFilteredData] =
     useState<PokemonRef[]>(allPokemonData);
@@ -37,6 +38,8 @@ const Index = ({ pokemon, generations }): JSX.Element => {
 
   const onRenderLimitChange = async (event) =>
     setRenderLimit(event.target.value);
+
+  console.log("allPokemonData", allPokemonData);
 
   return (
     <div>
@@ -81,6 +84,9 @@ const Index = ({ pokemon, generations }): JSX.Element => {
       <div className="flex flex-wrap justify-around mt-5">
         {filteredPokemonData && filteredPokemonData.length > 0
           ? filteredPokemonData.map((pokemon: PokemonRef, i: number) => {
+              i < renderLimit
+                ? console.log("pass in this to IndexCard...", pokemon)
+                : null;
               return i < renderLimit ? (
                 <IndexCard
                   key={i + pokemon.name}
@@ -97,7 +103,7 @@ const Index = ({ pokemon, generations }): JSX.Element => {
 
 Index.getInitialProps = async () => {
   const pokemonData = await axios
-    .get(REMOTE_URI.GET_POKEMON)
+    .get(LOCAL_URI.GET_POKEMON)
     .then((response) => response.data.results);
 
   const generations = await axios
@@ -108,6 +114,8 @@ Index.getInitialProps = async () => {
     name: "Choose a generation...",
     url: REMOTE_URI.GET_POKEMON,
   });
+
+  console.log({ pokemon: pokemonData.results, generations });
 
   return { pokemon: pokemonData.results, generations };
 };

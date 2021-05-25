@@ -4,6 +4,7 @@ export const debug = {
 
 export const LOCAL_URI = {
   GET_POKEMON: "http://localhost:3000/api/getPokemon",
+  GET_POKEMON_RELATIVE: "/api/getPokemon",
 };
 
 export const REMOTE_URI = {

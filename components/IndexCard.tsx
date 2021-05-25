@@ -22,7 +22,9 @@ const IndexCard = (props) => {
     return <div>No poke!</div>;
   }
 
-  const [pokemon, setPokemonCard] = useState<Partial<Pokemon>>({
+  console.log("IndexCard props", props);
+
+  const [pokemonCard, setPokemonCard] = useState<Partial<Pokemon>>({
     name: props.name,
     id: props.id,
     sprites: {
@@ -44,6 +46,10 @@ const IndexCard = (props) => {
       data: true,
     };
 
+    /**
+     * fetchData()
+     * @returns
+     */
     const fetchData = async () => {
       const source = axios.CancelToken.source();
       const result = await axios.get(
@@ -52,12 +58,15 @@ const IndexCard = (props) => {
       );
 
       if (mounted.data) {
-        setPokemonCard(result.data.raw);
+        setPokemonCard(result.data.results);
       }
 
       return () => source.cancel();
     };
 
+    /**
+     * fetchLocalStorage()
+     */
     fetchLocalStorage = async () => {
       const browserFavouritesStore = window.localStorage.getItem(
         LOCAL_STORAGE.FAVOURITES
@@ -130,12 +139,11 @@ const IndexCard = (props) => {
       );
 
       printLocalStorage("updated store - substracted");
+      alert(`${pokemonCard.name} saved!`);
 
       forceUpdate();
       return;
     }
-
-    console.log("pokemonCard", pokemonCard);
 
     parsedFavouriteStore.favourites.push(pokemonCard);
 
@@ -149,20 +157,35 @@ const IndexCard = (props) => {
     fetchLocalStorage();
   };
 
-  return (
-    <div
-      className="bg-white text-center p-1 m-2 border-solid border-4 border-gray-50 rounded-2xl shadow-lg hover:border-gray-100 transform hover:scale-105 cursor-pointer min-h-card min-w-card opacity=100"
-      onClick={(event) => handleCardClick(event, pokemon.id)}
-    >
-      <IndexCardHeader pokemon={pokemon} />
-      <IndexCardSprite pokemon={pokemon} />
-      <IndexCardSave
-        pokemon={pokemon}
-        isFavourite={isFavourite}
-        handlePokemonSave={handlePokemonSave}
-      />
-    </div>
-  );
+  console.log("pokemon?", pokemonCard);
+
+  if (pokemonCard) {
+    return (
+      <div
+        className="bg-white text-center p-1 m-2 border-solid border-4 border-gray-50 rounded-2xl shadow-lg hover:border-gray-100 transform hover:scale-105 cursor-pointer min-h-card min-w-card opacity=100"
+        onClick={(event) => handleCardClick(event, pokemonCard.id)}
+      >
+        <IndexCardHeader pokemon={pokemonCard} />
+        <IndexCardSprite pokemon={pokemonCard} />
+        <IndexCardSave
+          pokemon={pokemonCard}
+          isFavourite={isFavourite}
+          handlePokemonSave={handlePokemonSave}
+        />
+      </div>
+    );
+  }
+
+  console.log("no pokemon...?", pokemonCard);
+
+  if (!pokemonCard) {
+    return (
+      <div
+        className="bg-white text-center p-1 m-2 border-solid border-4 border-gray-50 rounded-2xl shadow-lg hover:border-gray-100 transform hover:scale-105 cursor-pointer min-h-card min-w-card opacity=100"
+        onClick={(event) => handleCardClick(event, pokemonCard.id)}
+      ></div>
+    );
+  }
 };
 
 export default IndexCard;

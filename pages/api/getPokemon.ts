@@ -10,7 +10,6 @@ const cors = initMiddleware(
   Cors({
     // Only allow requests with GET, POST and OPTIONS
     methods: ["GET", "POST", "OPTIONS"],
-    
   })
 );
 
@@ -24,8 +23,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(200).json({ limitChange: apiLimit });
   }
 
-  const allPokemon = await poker.resource(
-    `/api/v2/pokemon?limit=200${apiLimit}`
-  );
-  res.status(200).json({ raw: allPokemon });
+  const allPokemon = await poker.resource(`/api/v2/pokemon?limit=200`);
+  res.status(200).json({ results: allPokemon });
 };

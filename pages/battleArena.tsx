@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Pokemon } from "../inferfaces/pokemon.types";
 import PokemonDetail from "../components/PokemonDetail";
 import { LOCAL_STORAGE } from "../config/config";

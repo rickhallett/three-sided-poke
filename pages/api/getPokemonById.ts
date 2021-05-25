@@ -18,13 +18,12 @@ const download_image = (url: string, image_path: string) =>
   );
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-
   let pokemon = null;
 
   try {
     pokemon = await poker.resource("/api/v2/pokemon/" + req.query.id);
   } catch (error) {
-    return res.status(200).json({ raw: null });
+    return res.status(200).json({ results: null });
   }
 
   try {
@@ -37,5 +36,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     );
   }
 
-  return res.status(200).json({ raw: pokemon });
+  return res.status(200).json({ results: pokemon });
 };
