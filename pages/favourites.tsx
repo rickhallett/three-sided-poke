@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import IndexCard from "../components/IndexCard";
-import { Pokemon, PokemonRef } from "../inferfaces/pokemon.types";
+import { LOCAL_STORAGE } from "../config/config";
+import { Pokemon } from "../inferfaces/pokemon.types";
 
 const Favourites = (): JSX.Element => {
   const [allPokemonData, setAllData] = useState<Partial<Pokemon>[]>();
@@ -10,15 +11,13 @@ const Favourites = (): JSX.Element => {
   useEffect(() => {
     const fetchLocalStorage = async () => {
       const browserFavouritesStore = window.localStorage.getItem(
-        "three-sided-pokedex:favourites"
+        LOCAL_STORAGE.FAVOURITES
       );
 
       const storeObj = JSON.parse(browserFavouritesStore);
       if (!storeObj) {
         return;
       }
-
-      console.log(storeObj);
 
       setAllData(storeObj.favourites);
       setFilteredData(storeObj.favourites);
@@ -63,7 +62,7 @@ const Favourites = (): JSX.Element => {
       <div className="flex flex-wrap justify-around mt-5">
         {filteredPokemonData && filteredPokemonData.length > 0
           ? filteredPokemonData.map((pokemon, i: number) => {
-              return i < 20 ? (
+              return i < 100 ? (
                 <IndexCard
                   key={i + pokemon.name}
                   name={pokemon.name}

@@ -77,6 +77,11 @@ NOPE. Start again (api is just not necessary for this test, as no one mentioned 
 
 ## Getting started guide
 
+`git clone https://github.com/rickhallett/three-sided-poke.git`
+`cd three-sided-poke`
+`npm i`
+`npm run dev`
+
 ## Additional libraries
 
 - [pokedex-promise-v2](https://github.com/PokeAPI/pokedex-promise-v2)
@@ -102,7 +107,7 @@ This was fixed by implementing a custom 'mounted' guard within the useEffect of 
 
 8. Finding out half way through an implementation plan that 'window' is only recognised in React function components that are called from event handlers (different context to the function alone)
 
-9. Big difficulty in establishing a way that React can monitor the state of an object that tracks which pokemon are favourited. Tried all manner of combinations of useState, useEffect and custom data structures. This is simply just a lack of experience with React, which then created a bunch of hacky code to try and find a workaround, but likely defeats the entire point of using React in the first place.
+9. Big difficulty in establishing a way that React can monitor the state of an object that tracks which pokemon are favourited. Tried all manner of combinations of useState, useEffect and custom data structures. This is simply just a lack of experience with React, which then created a bunch of hacky code to try and find a workaround, but likely defeats the entire point of using React in the first place. I haven't found a work around for this so far.
 
 ## Extra features
 
@@ -112,5 +117,7 @@ This was fixed by implementing a custom 'mounted' guard within the useEffect of 
 
 ## Feature wish-list
 
+- Testing!! (running out of time)
+- I would like to have a more detailed think about the uses of hooks, state and component composition. As this is more or less my first time with React, I have a gut sense my implementation is very rough around the edges.
 - Make the app TS compliant all the way through for readability and better type safety (props, events etc)
 - Deprecate the parts of the UI couples to the local api routes; over time this form of caching has become a lot less important, and can be phased out for browser calls to the original pokeAPI

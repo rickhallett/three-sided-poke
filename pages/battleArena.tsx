@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Pokemon } from "../inferfaces/pokemon.types";
 import PokemonDetail from "../components/PokemonDetail";
+import { LOCAL_STORAGE } from '../config/config';
 
 const BattleArena = () => {
   const [favourites, setFavourites] = useState<Partial<Pokemon>[]>();
@@ -10,7 +11,7 @@ const BattleArena = () => {
   useEffect(() => {
     const fetchLocalStorage = async () => {
       const browserFavouritesStore = window.localStorage.getItem(
-        "three-sided-pokedex:favourites"
+        LOCAL_STORAGE.FAVOURITES
       );
 
       const storeObj = JSON.parse(browserFavouritesStore);

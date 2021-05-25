@@ -3,7 +3,7 @@ import axios from "axios";
 import { Pokemon } from "../inferfaces/pokemon.types";
 import IndexCardHeader from "../components/IndexCardHeader";
 import { printLocalStorage } from "../util/debug";
-import { LOCAL_URI } from "../config/config";
+import { LOCAL_URI, LOCAL_STORAGE } from "../config/config";
 import { IndexCardSprite } from "./IndexCardSprite";
 import { IndexCardSave } from "./IndexCardSave";
 
@@ -60,7 +60,7 @@ const IndexCard = (props) => {
 
     fetchLocalStorage = async () => {
       const browserFavouritesStore = window.localStorage.getItem(
-        "three-sided-pokedex:favourites"
+        LOCAL_STORAGE.FAVOURITES
       );
 
       const storeObj = JSON.parse(browserFavouritesStore);
@@ -97,12 +97,12 @@ const IndexCard = (props) => {
     forceUpdate();
 
     const browserFavouritesStore = window.localStorage.getItem(
-      "three-sided-pokedex:favourites"
+      LOCAL_STORAGE.FAVOURITES
     );
 
     if (!browserFavouritesStore) {
       window.localStorage.setItem(
-        "three-sided-pokedex:favourites",
+        LOCAL_STORAGE.FAVOURITES,
         JSON.stringify({ favourites: [pokemonCard] })
       );
 
@@ -125,7 +125,7 @@ const IndexCard = (props) => {
       );
 
       window.localStorage.setItem(
-        "three-sided-pokedex:favourites",
+        LOCAL_STORAGE.FAVOURITES,
         JSON.stringify({ favourites: parsedFavouriteStore.favourites })
       );
 
@@ -140,7 +140,7 @@ const IndexCard = (props) => {
     parsedFavouriteStore.favourites.push(pokemonCard);
 
     window.localStorage.setItem(
-      "three-sided-pokedex:favourites",
+      LOCAL_STORAGE.FAVOURITES,
       JSON.stringify({ favourites: parsedFavouriteStore.favourites })
     );
 

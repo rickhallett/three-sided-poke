@@ -10,3 +10,7 @@ export const LOCAL_URI = {
 export const REMOTE_URI = {
   GET_POKEMON: "https://pokeapi.co/api/v2/pokemon",
 };
+
+export const LOCAL_STORAGE = {
+  FAVOURITES: "three-sided-pokedex:favourites",
+};
