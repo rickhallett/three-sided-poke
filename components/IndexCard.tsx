@@ -2,6 +2,7 @@ import React, { useState, useEffect, useReducer } from "react";
 import axios from "axios";
 import { Pokemon } from "../inferfaces/pokemon.types";
 import IndexCardHeader from "../components/IndexCardHeader";
+import { print } from "../util/debug";
 
 let fetchLocalStorage;
 
@@ -18,7 +19,7 @@ const IndexCard = (props) => {
     return <div>No poke!</div>;
   }
 
-  const [pokemonCard, setPokemonCard] = useState<Partial<Pokemon>>({
+  const [pokemon, setPokemonCard] = useState<Partial<Pokemon>>({
     name: props.name,
     id: props.id,
     sprites: {
@@ -92,14 +93,6 @@ const IndexCard = (props) => {
     event.stopPropagation();
     forceUpdate();
 
-    const print = (msg) =>
-      console.log(
-        msg,
-        JSON.parse(
-          window.localStorage.getItem("three-sided-pokedex:favourites")
-        )
-      );
-
     const browserFavouritesStore = window.localStorage.getItem(
       "three-sided-pokedex:favourites"
     );
@@ -156,27 +149,23 @@ const IndexCard = (props) => {
   return (
     <div
       className="bg-white text-center p-1 m-2 border-solid border-4 border-gray-50 rounded-2xl shadow-lg hover:border-gray-100 transform hover:scale-105 cursor-pointer min-h-card min-w-card opacity=100"
-      onClick={(event) => handleCardClick(event, pokemonCard.id)}
+      onClick={(event) => handleCardClick(event, pokemon.id)}
     >
-      <IndexCardHeader pokemon={pokemonCard} />
+      <IndexCardHeader pokemon={pokemon} />
       <img
-        src={`/images/sprites/${pokemonCard ? pokemonCard.id : null}.png`}
+        src={`/images/sprites/${pokemon ? pokemon.id : null}.png`}
         width={150}
         className="mx-auto"
       ></img>
-      {pokemonCard && pokemonCard.stats ? (
+      {pokemon && pokemon.stats ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-6 w-6 m-2"
-          fill={
-            isFavourite[pokemonCard ? pokemonCard.id : null]
-              ? "yellow"
-              : "white"
-          }
+          fill={isFavourite[pokemon ? pokemon.id : null] ? "yellow" : "white"}
           viewBox="0 0 24 24"
           stroke="currentColor"
           style={{ zIndex: 1000 }}
-          onClick={(event) => handlePokemonSave(event, pokemonCard)}
+          onClick={(event) => handlePokemonSave(event, pokemon)}
         >
           <path
             strokeLinecap="round"
