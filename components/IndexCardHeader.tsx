@@ -1,4 +1,6 @@
-const IndexCardHead = ({pokemon}) => {
+import React from "react";
+
+const IndexCardHeader = ({pokemon}) => {
   return (
     <div className="flex justify-between p-3">
       <div className="text-gray-600 tracking-wider">
@@ -11,4 +13,4 @@ const IndexCardHead = ({pokemon}) => {
   );
 }
 
-export default IndexCardHead;
+export default IndexCardHeader;

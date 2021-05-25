@@ -1,8 +1,4 @@
 /**
- * @jest-environment
- */
-
-/**
  * @jest-environment jsdom
  */
 
@@ -14,21 +10,21 @@ import Index from "../pages";
 
 describe("Index page", () => {
   it("should render", async () => {
-    const response = await Index.getInitialProps();
-
-    console.log(response);
-
-    // function callback(data) {
-    //   try {
-    //     render(<Index />);
-    //     done();
-    //   } catch (error) {
-    //     console.error(error);
-    //     done();
-    //   }
-    // }
-
-    // fetchData(callback)
+    let response;
+    try {
+      response = await Index.getInitialProps();
+      if (response) {
+        console.log(response);
+        render(
+          <Index
+            pokemon={response.pokemon}
+            generations={response.generations}
+          />
+        );
+      }
+    } catch (error) {
+      console.error(error);
+    }
   });
 
   it("should render n index cards less than RENDER_LIMIT", () => {});
