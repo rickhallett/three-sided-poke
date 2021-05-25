@@ -36,7 +36,7 @@ const IndexCard = (props) => {
   const [modalMessage, setModalMessage] = useState("");
 
   const handleCloseModal = (event) => {
-    event.stopPropagation();
+    event ? event.stopPropagation() : null;
     setModalMessage("");
     setShowModel(false);
   };
@@ -137,7 +137,6 @@ const IndexCard = (props) => {
       );
 
       printLocalStorage("updated store - substracted");
-      // alert(`${pokemonCard.name} saved!`);
       setModalMessage(`${pokemonCard.name} removed!`);
       setShowModel(true);
 
@@ -152,7 +151,6 @@ const IndexCard = (props) => {
     );
 
     printLocalStorage("updated store - added");
-
     setModalMessage(`${pokemonCard.name} saved!`);
     setShowModel(true);
 

@@ -1,3 +1,4 @@
+import React from "react";
 import { PokemonStats } from "./PokemonStats";
 
 export const PokemonDetailBody = ({ pokemon }) => {

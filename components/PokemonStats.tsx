@@ -1,3 +1,5 @@
+import React from "react";
+
 export const PokemonStats = ({ pokemon }) => {
   return (
     <div className="text-center my-auto text-sm md:text-lg">

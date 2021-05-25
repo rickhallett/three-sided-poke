@@ -5,9 +5,9 @@ const PokemonDetail = ({ pokemon }) => {
   if (!pokemon) {
     return null;
   }
-  
+
   return (
-    <div className="bg-white w-1/2 mx-auto sm:w-full flex-col text-center p-1 m-1 border-solid border-4 border-gray-50 rounded-2xl shadow-lg">
+    <div className="bg-white w-1/2 mx-auto sm:w-full flex-col text-center p-1 m-1 mt-5 border-solid border-4 border-gray-50 rounded-2xl shadow-lg">
       <div className="flex w-full justify-between p-3">
         <div className="text-base sm:text-3xl text-gray-600 tracking-wider">
           {pokemon.name}

@@ -4,7 +4,6 @@ import { Pokemon, PokemonRef } from "../inferfaces/pokemon.types";
 import IndexCard from "../components/IndexCard";
 import { LOCAL_URI, REMOTE_URI } from "../config/config";
 
-
 const Index = ({ pokemon, generations }): JSX.Element => {
   const [allPokemonData, setAllData] = useState<PokemonRef[]>(pokemon);
   const [filteredPokemonData, setFilteredData] =
@@ -38,6 +37,16 @@ const Index = ({ pokemon, generations }): JSX.Element => {
     setRenderLimit(event.target.value);
 
   useEffect(() => {}, []);
+
+  // TODO: updating name like this on each list item WILL finally cause a re-render, but of the entire list, not a specific item. Inefficent and UI jarring
+  // const updateFilteredPokemon = (pokemon) => {
+  // const copyFilterData = filteredPokemonData.map((p) => ({
+  //   name: p.name + " ",
+  //   url: p.url,
+  //   updated: true,
+  // }));
+  // setFilteredData(copyFilterData);
+  // };
 
   return (
     <div>
@@ -90,12 +99,12 @@ const Index = ({ pokemon, generations }): JSX.Element => {
                   key={i + pokemon.name}
                   name={pokemon.name}
                   id={pokemon.url.split("/")[6]}
+                  // updateFilter={updateFilteredPokemon}
                 />
               ) : null;
             })
           : null}
       </div>
-      
     </div>
   );
 };

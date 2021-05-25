@@ -3,6 +3,11 @@ import React from "react";
 const AlertModal = ({ message, closeModal }) => {
   const [showModal, setShowModal] = React.useState(true);
   const [modalMessage, setModalMessage] = React.useState(message);
+
+  setTimeout(() => {
+    closeModal();
+  }, 2000);
+
   return (
     <>
       <div

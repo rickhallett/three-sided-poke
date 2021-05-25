@@ -6,7 +6,7 @@ import React from "react";
 import { PokemonStats } from "../../components/PokemonStats";
 import { PokemonDetailBody } from "../../components/PokemonDetailBody";
 import IndexCardHeader from "../../components/IndexCardHeader";
-import { REMOTE_URI } from "../../config/config";
+import { LOCAL_URI, REMOTE_URI } from "../../config/config";
 
 const Detail = ({ pokemon }: { pokemon: Pokemon }): JSX.Element => {
   if (!pokemon) {
@@ -32,15 +32,14 @@ const Detail = ({ pokemon }: { pokemon: Pokemon }): JSX.Element => {
           <Link href={`/pokemon/${pokemon.id + 1}`}>Next</Link>
         </div>
       </div>
-      
     </div>
   );
 };
 
 Detail.getInitialProps = async ({ query }) => {
   const response = await axios
-    .get(`${REMOTE_URI.GET_POKEMON}/${query.id}`)
-    .then((response) => response.data.raw);
+    .get(`${LOCAL_URI.GET_POKEMON_BY_ID}?id=${query.id}`)
+    .then((response) => response.data.results);
 
   return { pokemon: response };
 };
