@@ -1,7 +1,6 @@
 import axios from "axios";
 import fs from "fs";
 import { NextApiRequest, NextApiResponse } from "next";
-import { tryGetPreviewData } from 'next/dist/next-server/server/api-utils';
 import poker from "./cacher";
 
 const download_image = (url: string, image_path: string) =>

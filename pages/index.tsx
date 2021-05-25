@@ -97,11 +97,11 @@ const Index = ({ pokemon, generations }): JSX.Element => {
 
 Index.getInitialProps = async () => {
   const pokemonData = await axios
-    .get(LOCAL_URI.GET_POKEMON)
-    .then((response) => response.data.raw);
+    .get(REMOTE_URI.GET_POKEMON)
+    .then((response) => response.data.results);
 
   const generations = await axios
-    .get(LOCAL_URI.GET_GENERATIONS)
+    .get(REMOTE_URI.GET_GENERATIONS)
     .then((response) => response.data.results);
 
   generations.unshift({

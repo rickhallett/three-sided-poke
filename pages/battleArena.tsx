@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Pokemon } from "../inferfaces/pokemon.types";
 import PokemonDetail from "../components/PokemonDetail";
-import { LOCAL_STORAGE } from '../config/config';
+import { LOCAL_STORAGE } from "../config/config";
 
 const BattleArena = () => {
   const [favourites, setFavourites] = useState<Partial<Pokemon>[]>();
@@ -19,8 +19,6 @@ const BattleArena = () => {
         return;
       }
 
-      console.log(storeObj);
-
       setFavourites(storeObj.favourites);
     };
 
@@ -28,14 +26,10 @@ const BattleArena = () => {
   }, []);
 
   const handleContenderOneSelect = (event) => {
-    console.log(event.target.value);
-    console.log(favourites);
     setContenderOne(favourites.find((p) => p.name === event.target.value));
   };
 
   const handleContenderTwoSelect = (event) => {
-    console.log(event.target.value);
-    console.log(favourites);
     setContenderTwo(favourites.find((p) => p.name === event.target.value));
   };
 
