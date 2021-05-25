@@ -1,5 +1,9 @@
 /**
- * @jest-environment node
+ * @jest-environment
+ */
+
+/**
+ * @jest-environment jsdom
  */
 
 import "jest";
