@@ -3,7 +3,8 @@ import axios from "axios";
 import { Pokemon } from "../inferfaces/pokemon.types";
 import IndexCardHeader from "../components/IndexCardHeader";
 import { printLocalStorage } from "../util/debug";
-import { LOCAL_URI, } from '../config/config';
+import { LOCAL_URI } from "../config/config";
+import { IndexCardSprite } from "./IndexCardSprite";
 
 let fetchLocalStorage;
 
@@ -153,11 +154,7 @@ const IndexCard = (props) => {
       onClick={(event) => handleCardClick(event, pokemon.id)}
     >
       <IndexCardHeader pokemon={pokemon} />
-      <img
-        src={`/images/sprites/${pokemon ? pokemon.id : null}.png`}
-        width={150}
-        className="mx-auto"
-      ></img>
+      <IndexCardSprite pokemon={pokemon} />
       {pokemon && pokemon.stats ? (
         <svg
           className="h-6 w-6 m-2"
