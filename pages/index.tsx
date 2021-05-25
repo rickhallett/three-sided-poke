@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Pokemon, PokemonRef } from "../inferfaces/pokemon.types";
 import IndexCard from "../components/IndexCard";
+import { LOCAL_URI, REMOTE_URI } from '../config/config';
 
 const Index = ({ pokemon, generations }): JSX.Element => {
   const [allPokemonData, setAllData] = useState<PokemonRef[]>(pokemon);
@@ -96,16 +97,16 @@ const Index = ({ pokemon, generations }): JSX.Element => {
 
 Index.getInitialProps = async () => {
   const pokemonData = await axios
-    .get("http://localhost:3000/api/getPokemon")
+    .get(LOCAL_URI.GET_POKEMON)
     .then((response) => response.data.raw);
 
   const generations = await axios
-    .get("https://pokeapi.co/api/v2/generation")
+    .get(LOCAL_URI.GET_GENERATIONS)
     .then((response) => response.data.results);
 
   generations.unshift({
     name: "Choose a generation...",
-    url: "https://pokeapi.co/api/v2/pokemon",
+    url: REMOTE_URI.GET_POKEMON,
   });
 
   return { pokemon: pokemonData.results, generations };

@@ -2,7 +2,8 @@ import React, { useState, useEffect, useReducer } from "react";
 import axios from "axios";
 import { Pokemon } from "../inferfaces/pokemon.types";
 import IndexCardHeader from "../components/IndexCardHeader";
-import { print } from "../util/debug";
+import { printLocalStorage } from "../util/debug";
+import { LOCAL_URI, } from '../config/config';
 
 let fetchLocalStorage;
 
@@ -103,7 +104,7 @@ const IndexCard = (props) => {
         JSON.stringify({ favourites: [pokemonCard] })
       );
 
-      print("init store:");
+      printLocalStorage("init store:");
 
       return;
     }
@@ -126,7 +127,7 @@ const IndexCard = (props) => {
         JSON.stringify({ favourites: parsedFavouriteStore.favourites })
       );
 
-      print("updated store - substracted");
+      printLocalStorage("updated store - substracted");
 
       forceUpdate();
       return;
@@ -141,7 +142,7 @@ const IndexCard = (props) => {
       JSON.stringify({ favourites: parsedFavouriteStore.favourites })
     );
 
-    print("updated store - added");
+    printLocalStorage("updated store - added");
 
     fetchLocalStorage();
   };
@@ -159,7 +160,6 @@ const IndexCard = (props) => {
       ></img>
       {pokemon && pokemon.stats ? (
         <svg
-          xmlns="http://www.w3.org/2000/svg"
           className="h-6 w-6 m-2"
           fill={isFavourite[pokemon ? pokemon.id : null] ? "yellow" : "white"}
           viewBox="0 0 24 24"
@@ -176,7 +176,6 @@ const IndexCard = (props) => {
         </svg>
       ) : (
         <svg
-          xmlns="http://www.w3.org/2000/svg"
           className="h-6 w-6"
           fill="none"
           viewBox="0 0 24 24"

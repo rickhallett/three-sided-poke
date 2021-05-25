@@ -31,7 +31,6 @@ function MyApp({ Component, pageProps }: AppProps) {
             >
               <svg
                 className="fill-current text-gray-900"
-                xmlns="http://www.w3.org/2000/svg"
                 width="20"
                 height="20"
                 viewBox="0 0 20 20"
@@ -96,7 +95,6 @@ function MyApp({ Component, pageProps }: AppProps) {
               >
                 <svg
                   className="fill-current hover:text-black"
-                  xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"
                   viewBox="0 0 24 24"
