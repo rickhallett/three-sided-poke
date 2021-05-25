@@ -118,6 +118,7 @@ This was fixed by implementing a custom 'mounted' guard within the useEffect of 
 ## Feature wish-list
 
 - Testing!! (running out of time)
+- Some code comments, particularly on the javascript workarounds; these may not be immediately obvious to another reader.
 - I would like to have a more detailed think about the uses of hooks, state and component composition. As this is more or less my first time with React, I have a gut sense my implementation is very rough around the edges.
 - Make the app TS compliant all the way through for readability and better type safety (props, events etc)
 - Deprecate the parts of the UI couples to the local api routes; over time this form of caching has become a lot less important, and can be phased out for browser calls to the original pokeAPI
