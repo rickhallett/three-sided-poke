@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useReducer } from "react";
 import axios from "axios";
 import { Pokemon } from "../inferfaces/pokemon.types";
+import IndexCardHeader from "../components/IndexCardHeader";
 
 let fetchLocalStorage;
 
@@ -157,14 +158,7 @@ const IndexCard = (props) => {
       className="bg-white text-center p-1 m-2 border-solid border-4 border-gray-50 rounded-2xl shadow-lg hover:border-gray-100 transform hover:scale-105 cursor-pointer min-h-card min-w-card opacity=100"
       onClick={(event) => handleCardClick(event, pokemonCard.id)}
     >
-      <div className="flex justify-between p-3">
-        <div className="text-gray-600 tracking-wider">
-          {pokemonCard ? pokemonCard.name : null}
-        </div>
-        <div className="text-3xl font-bold text-blue-300">
-          #{pokemonCard ? pokemonCard.id : null}
-        </div>
-      </div>
+      <IndexCardHeader pokemon={pokemonCard} />
       <img
         src={`/images/sprites/${pokemonCard ? pokemonCard.id : null}.png`}
         width={150}
