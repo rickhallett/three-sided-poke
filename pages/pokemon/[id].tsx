@@ -37,7 +37,9 @@ const Detail = ({ pokemon }: { pokemon: Pokemon }): JSX.Element => {
 
 Detail.getInitialProps = async ({ query }) => {
   const response = await axios
-    .get(`http://localhost:3000/api/getPokemonById?id=${query.id}`)
+    .get(
+      `https://three-sided-poke.vercel.app/api/getPokemonById?id=${query.id}`
+    )
     .then((response) => response.data.raw);
 
   return { pokemon: response };

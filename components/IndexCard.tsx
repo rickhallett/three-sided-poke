@@ -47,7 +47,7 @@ const IndexCard = (props) => {
     const fetchData = async () => {
       const source = axios.CancelToken.source();
       const result = await axios.get(
-        `http://localhost:3000/api/getPokemonById?id=${props.id}`,
+        `https://three-sided-poke.vercel.app/api/getPokemonById?id=${props.id}`,
         { cancelToken: source.token }
       );
 

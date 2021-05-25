@@ -3,7 +3,7 @@ export const debug = {
 };
 
 export const LOCAL_URI = {
-  GET_POKEMON: "http://localhost:3000/api/getPokemon",
+  GET_POKEMON: "https://three-sided-poke.vercel.app/api/getPokemon",
   GET_GENERATIONS: "https://pokeapi.co/api/v2/generation",
 };
 
