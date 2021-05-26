@@ -11,7 +11,7 @@ const AlertModal = ({ message, closeModal }) => {
   return (
     <>
       <div
-        className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+        className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none h-full"
         onClick={(event) => closeModal(event)}
       >
         <div className="relative w-auto mx-auto max-w-sm">

@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Pokemon, PokemonRef } from "../inferfaces/pokemon.types";
 import IndexCard from "../components/IndexCard";
-import { LOCAL_URI, REMOTE_URI } from "../config/config";
+import { LOCAL_STORAGE, LOCAL_URI, REMOTE_URI } from "../config/config";
 
 const Index = ({ pokemon, generations }): JSX.Element => {
   const [allPokemonData, setAllData] = useState<PokemonRef[]>(pokemon);
@@ -35,6 +35,15 @@ const Index = ({ pokemon, generations }): JSX.Element => {
 
   const onRenderLimitChange = async (event) =>
     setRenderLimit(event.target.value);
+
+  useEffect(() => {
+    const favouritesStore = window.localStorage.getItem(
+      LOCAL_STORAGE.FAVOURITES
+    );
+    if (!favouritesStore) {
+      window.localStorage.setItem(LOCAL_STORAGE.FAVOURITES, JSON.stringify([]));
+    }
+  }, []);
 
   return (
     <div>

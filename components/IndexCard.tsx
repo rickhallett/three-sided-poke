@@ -119,6 +119,9 @@ const IndexCard = (props) => {
         JSON.stringify({ favourites: [pokemonCard] })
       );
 
+      setModalMessage(`${pokemonCard.name} saved!`);
+      setShowModel(true);
+
       printLocalStorage("init store:");
 
       return;
