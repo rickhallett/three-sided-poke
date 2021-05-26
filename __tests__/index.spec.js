@@ -8,6 +8,7 @@ import React from "react";
 import { logRoles, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Index from "../pages";
+import IndexCardHeader from "../components/IndexCardHeader";
 
 describe("Pages", () => {
   describe("Index", () => {
@@ -82,7 +83,7 @@ describe("Pages", () => {
   });
 });
 
-xdescribe("Components", () => {
+describe("Components", () => {
   xdescribe("IndexCard", () => {
     xit("", async () => {
       throw new Error("Test not implemented");
@@ -102,6 +103,13 @@ xdescribe("Components", () => {
 
     xit("", async () => {
       expect(true).toBe(false);
+    });
+  });
+
+  describe("IndexCardHeader", () => {
+    it("has correct pokemon text", () => {
+      render(<IndexCardHeader pokemon={{ name: "Pikachu", id: "666" }} />);
+      expect(screen.getByTestId("pokemon-name")).toHaveTextContent("Pikachu");
     });
   });
 });
