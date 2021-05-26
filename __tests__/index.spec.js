@@ -28,33 +28,20 @@ describe("Pages", () => {
       }
     });
 
-    xit("should render with props", async () => {
-      let response;
-      try {
-        response = await Index.getInitialProps();
-        if (response) {
-          render(
-            <Index
-              pokemon={response.pokemon}
-              generations={response.generations}
-            />
-          );
-          // done();
-        }
-      } catch (error) {
-        console.error(error);
+    it("should render n index cards less than RENDER_LIMIT", async () => {
+      const props = await Index.getInitialProps();
+
+      if (props) {
+        render(
+          <Index pokemon={props.pokemon} generations={props.generations} />
+        );
+
+        const cards = await screen.findAllByTestId("pokemon-name");
+        expect(cards.length).toBe(20);
       }
-
-      // await waitFor(() => screen.findAllByText("#"));
-
-      expect(screen.findAllByText("#").length).toBe(20);
     });
 
-    xit("should render n index cards less than RENDER_LIMIT", () => {
-      render(<Index pokemon={[]} generations={[]} />);
-      screen.debug();
-      expect(2).toBe(2);
-    });
+    it("should change the number of rendered index cards if the user changes the render limit", async () => {});
   });
 });
 

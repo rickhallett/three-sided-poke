@@ -3,7 +3,7 @@ import axios from "axios";
 import { Pokemon } from "../inferfaces/pokemon.types";
 import IndexCardHeader from "../components/IndexCardHeader";
 import { printLocalStorage } from "../util/debug";
-import { LOCAL_URI, LOCAL_STORAGE } from "../config/config";
+import { LOCAL_URI, LOCAL_STORAGE, REMOTE_URI } from "../config/config";
 import { IndexCardSprite } from "./IndexCardSprite";
 import { IndexCardSave } from "./IndexCardSave";
 import AlertModal from "./AlertModal";
@@ -55,12 +55,18 @@ const IndexCard = (props) => {
     const fetchData = async () => {
       const source = axios.CancelToken.source();
       const result = await axios.get(
-        `http://localhost:3000/api/getPokemonById?id=${props.id}`,
+        // `http://localhost:3000/api/getPokemonById?id=${props.id}`,
+        `${REMOTE_URI.GET_POKEMON}/${props.id}`,
         { cancelToken: source.token }
       );
 
       if (mounted.data) {
-        setPokemonCard(result.data.results);
+        // remote/local data source format conditional
+        if (result.data.results) {
+          setPokemonCard(result.data.results);
+        } else {
+          setPokemonCard(result.data);
+        }
       }
 
       return () => source.cancel();

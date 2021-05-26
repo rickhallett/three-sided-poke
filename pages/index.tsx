@@ -47,6 +47,8 @@ const Index = ({ pokemon, generations }): JSX.Element => {
           placeholder="Render limit"
           width="10px"
           onChange={(event) => onRenderLimitChange(event)}
+          data-testid="render-limit"
+          defaultValue={20}
         ></input>
         <input
           className="border-2 border-gray-300 hover:border-gray-400 bg-white h-10 px-5 pr-16 mr-1 rounded-full text-sm focus:outline-none"
@@ -103,8 +105,6 @@ Index.getInitialProps = async () => {
     .then((response) => response.data.results);
 
   pokemonData = pokemonData.results ? pokemonData.results : pokemonData;
-
-  console.log(pokemonData);
 
   const generations = await axios
     .get(REMOTE_URI.GET_GENERATIONS)
