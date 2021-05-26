@@ -19,7 +19,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "components/IndexCard.spec.js"
+    "__tests__/index.spec.js"
   ],
   "exclude": ["node_modules"]
 }
