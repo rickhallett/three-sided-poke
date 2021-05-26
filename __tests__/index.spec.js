@@ -5,7 +5,7 @@
 import "jest";
 import "@testing-library/jest-dom";
 import React from "react";
-import { render, screen, waitFor } from "@testing-library/react";
+import { logRoles, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Index from "../pages";
 
@@ -60,7 +60,25 @@ describe("Pages", () => {
       }
     });
 
-    xit("if the user types in the search bar only pokemon names that partially match the search string should show", async () => {});
+    it("if the user types in the search bar only pokemon names that partially match the search string should show", async () => {
+      const props = await Index.getInitialProps();
+
+      if (props) {
+        render(
+          <Index pokemon={props.pokemon} generations={props.generations} />
+        );
+
+        const cardsBeforeSearch = await screen.findAllByTestId("pokemon-name");
+        const bulbasaur = cardsBeforeSearch[0];
+        const squirtle = cardsBeforeSearch[6];
+
+        userEvent.type(screen.getByPlaceholderText("Search by name..."), "a");
+        const cardsAfterSearch = await screen.findAllByTestId("pokemon-name");
+
+        expect(cardsAfterSearch.length).toBeLessThan(cardsBeforeSearch.length);
+        expect(cardsAfterSearch).toContain(bulbasaur);
+      }
+    });
   });
 });
 
