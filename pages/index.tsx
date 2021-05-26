@@ -36,18 +36,6 @@ const Index = ({ pokemon, generations }): JSX.Element => {
   const onRenderLimitChange = async (event) =>
     setRenderLimit(event.target.value);
 
-  useEffect(() => {}, []);
-
-  // TODO: updating name like this on each list item WILL finally cause a re-render, but of the entire list, not a specific item. Inefficent and UI jarring
-  // const updateFilteredPokemon = (pokemon) => {
-  // const copyFilterData = filteredPokemonData.map((p) => ({
-  //   name: p.name + " ",
-  //   url: p.url,
-  //   updated: true,
-  // }));
-  // setFilteredData(copyFilterData);
-  // };
-
   return (
     <div>
       <div className="flex justify-center mx-auto text-gray-600 m-5">
@@ -110,9 +98,13 @@ const Index = ({ pokemon, generations }): JSX.Element => {
 };
 
 Index.getInitialProps = async () => {
-  const pokemonData = await axios
-    .get(LOCAL_URI.GET_POKEMON)
+  let pokemonData = await axios
+    .get(REMOTE_URI.GET_POKEMON)
     .then((response) => response.data.results);
+
+  pokemonData = pokemonData.results ? pokemonData.results : pokemonData;
+
+  console.log(pokemonData);
 
   const generations = await axios
     .get(REMOTE_URI.GET_GENERATIONS)
@@ -123,7 +115,7 @@ Index.getInitialProps = async () => {
     url: REMOTE_URI.GET_POKEMON,
   });
 
-  return { pokemon: pokemonData.results, generations };
+  return { pokemon: pokemonData, generations };
 };
 
 export default Index;
