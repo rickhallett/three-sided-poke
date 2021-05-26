@@ -47,9 +47,9 @@ const Index = ({ pokemon, generations }): JSX.Element => {
 
   return (
     <div>
-      <div className="flex justify-center mx-auto text-gray-600 m-5">
+      <div className="flex-col sm:flex-row sm:justify-center text-center mx-auto text-gray-600 m-5">
         <input
-          className="border-2 border-gray-300 hover:border-gray-400 bg-white h-10 px-5 pr-2 mr-1 rounded-full text-sm focus:outline-none"
+          className="block sm:inline-block w-full sm:w-auto border-2 border-gray-300 hover:border-gray-400 bg-white h-10 px-5 pr-2 mr-1 rounded-full text-sm focus:outline-none"
           type="number"
           name="limit"
           min={0}
@@ -60,13 +60,13 @@ const Index = ({ pokemon, generations }): JSX.Element => {
           defaultValue={20}
         ></input>
         <input
-          className="border-2 border-gray-300 hover:border-gray-400 bg-white h-10 px-5 pr-16 mr-1 rounded-full text-sm focus:outline-none"
+          className="block sm:inline-block w-full sm:w-auto border-2 border-gray-300 hover:border-gray-400 bg-white h-10 px-5 pr-16 mr-1 rounded-full text-sm focus:outline-none"
           type="search"
           name="search"
           placeholder="Search by name..."
           onChange={(event) => onSearchInput(event)}
         ></input>
-        <div className="relative inline-flex">
+        <div className="sm:relative sm:inline-flex">
           <svg
             className="w-2 h-2 absolute top-0 right-0 m-4 pointer-events-none"
             viewBox="0 0 412 232"
@@ -78,7 +78,7 @@ const Index = ({ pokemon, generations }): JSX.Element => {
             />
           </svg>
           <select
-            className="border-2 border-gray-300 rounded-full text-gray-400 h-10 pl-5 pr-10 bg-white text-sm hover:border-gray-400 focus:outline-none appearance-none"
+            className="block sm:inline-block w-full sm:w-auto border-2 border-gray-300 rounded-full text-gray-400 h-10 pl-5 pr-10 bg-white text-sm hover:border-gray-400 focus:outline-none appearance-none"
             onInput={(event) => handleGenerationSelect(event)}
           >
             {generations.map((generation, i) => (

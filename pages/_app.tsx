@@ -3,7 +3,7 @@ import { AppProps } from "next/app";
 import Head from "next/head";
 import React from "react";
 import { Nav } from "../components/Nav";
-import { NavBarRightIcons } from '../components/NavBarRightIcons';
+import { NavBarRightIcons } from "../components/NavBarRightIcons";
 import { NavMenuToggleButton } from "../components/NavMenuToggleButton";
 import { ThreeSidedCubeLogo } from "../components/ThreeSidedCubeLogo";
 import "../styles/globals.css";
@@ -30,7 +30,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <NavBarRightIcons />
           </div>
         </nav>
-        
+
         <Component {...pageProps} />
       </div>
     </React.Fragment>
